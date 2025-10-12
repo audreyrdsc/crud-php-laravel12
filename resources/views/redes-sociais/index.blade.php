@@ -385,15 +385,22 @@
                                 <td> {{ $rede->id }}</td> 
                                 <td> {{ $rede->nome }} </td> 
                                 <td> {{ $rede->link }} </td> 
+                        
                                 <td>
-                                    <i class="bi bi-pencil-square" class="text-primary" title="Editar"></i>
+                                    <a href="{{ route('redes-sociais.edit', $rede->id) }}" class="text-primary" title="Editar">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
                                 </td> 
-                                <td>                                
-                                    <i class="bi bi-trash" class="text-danger" 
-                                        onclick="return confirm('Tem certeza que deseja excluir este registro?')" title="Excluir"></i>
+
+                                <td>
+                                    <a href="{{ route('redes-sociais.destroy', $rede->id) }}"
+                                        class="text-danger"
+                                        onclick="return confirm('Tem certeza que deseja excluir este registro?')"
+                                        title="Excluir">
+                                            <i class="bi bi-trash"></i>
+                                    </a>
                                 </td> 
-                            </tr>
-                            
+                            </tr>   
                         @endforeach
                           
                     </tbody> 
