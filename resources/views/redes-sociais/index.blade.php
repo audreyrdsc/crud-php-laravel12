@@ -355,7 +355,9 @@
                         <tr> 
                             <th scope="col">Id</th> 
                             <th scope="col">Nome</th> 
-                            <th scope="col">Link</th>  
+                            <th scope="col">Link</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Excluir</th>  
                         </tr> 
                     </thead>
 
