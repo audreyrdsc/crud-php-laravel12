@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Rede extends Model
 {
     protected $table = 'redes';
+
     protected $fillable = [
         'nome',
-        'link'
-    ];
+        'link',
+        'password'
+        ];
 }
