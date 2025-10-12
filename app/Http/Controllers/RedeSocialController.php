@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Rede;
 
 class RedeSocialController extends Controller
 {
@@ -29,7 +30,24 @@ class RedeSocialController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $request->validate([
+            'nome' => 'required|string|max:100',
+            'link' => 'required|url|max:255',
+        ]);
+
+        $rede = new Rede();
+
+        $rede->nome = $request->nome;
+        $rede->link = $request->link;
+
+        $rede->save();
+
+        return redirect()
+                ->route('redes-sociais.index')
+                ->with('success', 'Rede Social cadastrada com sucesso!');
+                //sucess é uma variavel de sessão que retornará a mensagem em index.blade.php
+
     }
 
     /**
