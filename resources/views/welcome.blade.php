@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Astro v5.13.2">
-        <title>Dashboard Template · Bootstrap v5.3</title>
+        <title>Painel MsFlix - Audrey Cardoso</title>
         
         <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
@@ -281,11 +281,11 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto"> 
                     <ul class="nav flex-column"> 
                         <li class="nav-item"> 
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#"> 
+                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/"> 
                                 <svg class="bi" aria-hidden="true">
                                     <use xlink:href="#house-fill"></use>
                                 </svg>
-                            Dashboard
+                            Painel
                             </a> 
                         </li> 
                         
@@ -294,16 +294,16 @@
                                 <svg class="bi" aria-hidden="true">
                                     <use xlink:href="#file-earmark"></use>
                                 </svg>
-                            Orders
+                            Configurações
                             </a> 
                         </li> 
                         
                         <li class="nav-item"> 
-                            <a class="nav-link d-flex align-items-center gap-2" href="#"> 
+                            <a class="nav-link d-flex align-items-center gap-2" href="{{ route('redes-sociais.index') }}"> 
                                 <svg class="bi" aria-hidden="true">
                                     <use xlink:href="#cart"></use>
                                 </svg>
-                            Products
+                            Redes Sociais
                             </a> 
                         </li> 
                         
@@ -410,7 +410,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
             
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> 
-                    <h1 class="h2">Dashboard</h1> 
+                    <h1 class="h2">Painel MsFlix</h1> 
                 
                     <div class="btn-toolbar mb-2 mb-md-0"> 
                         <div class="btn-group me-2"> 
@@ -426,18 +426,19 @@
                     </div> 
                 </div> 
 
-            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> 
-                <h2>Section title</h2> 
+            <!-- Area Chart Example    
+            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>  -->
+                <h2>Tabela Básica</h2> 
 
             <div class="table-responsive small"> 
                 <table class="table table-striped table-sm"> 
                     <thead> 
                         <tr> 
-                            <th scope="col">#</th> 
-                            <th scope="col">Header</th> 
-                            <th scope="col">Header</th> 
-                            <th scope="col">Header</th> 
-                            <th scope="col">Header</th> 
+                            <th scope="col">Seq</th> 
+                            <th scope="col">Header 1</th> 
+                            <th scope="col">Header 2</th> 
+                            <th scope="col">Header 3</th> 
+                            <th scope="col">Header 4</th> 
                         </tr> 
                     </thead>
 
@@ -571,7 +572,7 @@
                         </tr> 
                     </tbody> 
                 </table> 
-            </div> 
+            </div>
         </main> 
     </div> 
 </div>   
