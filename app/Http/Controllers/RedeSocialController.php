@@ -12,8 +12,10 @@ class RedeSocialController extends Controller
      */
     public function index()
     {
+        $redes = Rede::all(); //Pega todos os registros da tabela 'redes'
+        
         //Acessa a pasta resources/views/redes-sociais/index.blade.php
-        return view('redes-sociais.index');
+        return view('redes-sociais.index', compact('redes'));
     }
 
     /**
