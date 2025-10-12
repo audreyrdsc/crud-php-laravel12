@@ -20,7 +20,8 @@ class RedeSocialController extends Controller
      */
     public function create()
     {
-        //
+        //Acessa a pasta resources/views/redes-sociais/create.blade.php
+        return view('redes-sociais.create');
     }
 
     /**
@@ -28,7 +29,7 @@ class RedeSocialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
