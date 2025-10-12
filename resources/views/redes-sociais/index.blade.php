@@ -345,11 +345,28 @@
                     </div> 
                 </div> 
 
-            <!-- Area Chart Example    
-            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-                <h2>Lista de Redes Sociais</h2>   -->
+            <!-- Area da tabela -->
 
-            <div class="table-responsive small"> 
+            <div class="table-responsive small">    
+
+                <!-- Mensagem de alerta de cadastrado com sucesso -->  
+                @if (session('success'))
+                    <div class="alert alert-success" id="success-alert">
+                        {{ session('success') }}
+                    </div>
+
+                    <script> // Aguarda 5 segundos (5000 ms) e depois remove a mensagem
+                        setTimeout(function() {
+                            const alert = document.getElementById('success-alert');
+                            if (alert) {
+                                alert.style.transition = "opacity 0.5s ease";
+                                alert.style.opacity = "0"; // animação de desaparecimento
+                                setTimeout(() => alert.remove(), 500); // remove do DOM após a animação
+                            }
+                        }, 5000);
+                    </script>
+                @endif
+                                    
                 <table class="table table-striped table-sm"> 
                     <thead> 
                         <tr> 
