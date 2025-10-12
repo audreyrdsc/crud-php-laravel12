@@ -65,7 +65,8 @@ class RedeSocialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $rede = Rede::findOrFail($id); //Busca a rede social pelo ID, ou retorna erro 404 se não encontrar
+        return view('redes-sociais.edit', compact('rede')); //Acessa a view de edição, passando a rede social encontrada
     }
 
     /**
