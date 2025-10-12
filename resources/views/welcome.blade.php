@@ -1,4 +1,5 @@
 
+<!-- Página principal - Dashboard -->
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="auto"> 
    
