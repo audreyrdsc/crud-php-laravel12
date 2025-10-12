@@ -379,18 +379,23 @@
                     </thead>
 
                     <tbody> 
-                        <tr> 
-                            <td>7</td> 
-                            <td>Youtube</td> 
-                            <td>Link</td> 
-                            <td>
-                                <i class="bi bi-pencil-square" class="text-primary" title="Editar"></i>
-                            </td> 
-                            <td>                                
-                                <i class="bi bi-trash" class="text-danger" 
-                                    onclick="return confirm('Tem certeza que deseja excluir este registro?')" title="Excluir"></i>
-                            </td> 
-                        </tr>  
+
+                        @foreach($redes as $rede)
+                            <tr> 
+                                <td> {{ $rede->id }}</td> 
+                                <td> {{ $rede->nome }} </td> 
+                                <td> {{ $rede->link }} </td> 
+                                <td>
+                                    <i class="bi bi-pencil-square" class="text-primary" title="Editar"></i>
+                                </td> 
+                                <td>                                
+                                    <i class="bi bi-trash" class="text-danger" 
+                                        onclick="return confirm('Tem certeza que deseja excluir este registro?')" title="Excluir"></i>
+                                </td> 
+                            </tr>
+                            
+                        @endforeach
+                          
                     </tbody> 
                 </table> 
             </div>
