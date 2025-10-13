@@ -346,26 +346,27 @@
                 </div> 
 
             <!-- Area da tabela -->
-
             <div class="table-responsive small">    
 
-                <!-- Mensagem de alerta de cadastrado com sucesso -->  
-                @if (session('success'))
+                <!-- Mensagens de sucesso -->
+                @if (session('success') || session('updated') || session('deleted'))
                     <div class="alert alert-success" id="success-alert">
-                        {{ session('success') }}
+                        {{ session('success') ?? session('updated') ?? session('deleted') }}
                     </div>
 
-                    <script> // Aguarda 5 segundos (5000 ms) e depois remove a mensagem
+                    <script>
+                        // Aguarda 5 segundos (5000 ms) e depois remove a mensagem
                         setTimeout(function() {
                             const alert = document.getElementById('success-alert');
                             if (alert) {
                                 alert.style.transition = "opacity 0.5s ease";
-                                alert.style.opacity = "0"; // animação de desaparecimento
+                                alert.style.opacity = "0"; // efeito de fade
                                 setTimeout(() => alert.remove(), 500); // remove do DOM após a animação
                             }
                         }, 5000);
                     </script>
                 @endif
+
                                     
                 <table class="table table-striped table-sm"> 
                     <thead> 
@@ -393,11 +394,26 @@
                                 </td> 
 
                                 <td>
-                                    <a href="{{ route('redes-sociais.destroy', $rede->id) }}"
-                                        class="text-danger"
-                                        onclick="return confirm('Tem certeza que deseja excluir este registro?')"
-                                        title="Excluir">
-                                            <i class="bi bi-trash"></i>
+                                <!-- Forma Simples: <form action="{ route('redes-sociais.destroy', $rede->id) }}" method="POST" id="delete-form-{{ $rede->id }}" style="display: none;">
+                                        csrf
+                                        method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
+                                    </form> -->
+
+                                    <!-- Formulário oculto | Necessário para enviar o método DELETE -->
+                                    <form action="{{ route('redes-sociais.destroy', $rede->id) }}" 
+                                        method="POST" id="delete-form-{{ $rede->id }}" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+
+                                    <!-- Ícone visível para excluir -->
+                                    <a href="#" class="text-danger" title="Excluir"
+                                    onclick="if(confirm('Tem certeza que deseja excluir este registro?')) { 
+                                                    document.getElementById('delete-form-{{ $rede->id }}').submit(); 
+                                                } 
+                                                return false;">
+                                        <i class="bi bi-trash"></i>
                                     </a>
                                 </td> 
                             </tr>   
