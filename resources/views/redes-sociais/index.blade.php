@@ -400,7 +400,7 @@
                                         <button type="submit" class="btn btn-danger">Excluir</button>
                                     </form> -->
 
-                                    <!-- Formulário oculto | Necessário para enviar o método DELETE -->
+                                    <!-- Formulário oculto | Necessário para enviar o método DELETE Formulário-->
                                     <form action="{{ route('redes-sociais.destroy', $rede->id) }}" 
                                         method="POST" id="delete-form-{{ $rede->id }}" style="display: none;">
                                         @csrf
