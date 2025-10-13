@@ -422,6 +422,7 @@
                     </tbody> 
                 </table> 
             </div>
+            {{ $redes->appends(request()->query())->links() }}  <!-- Paginação -->
         </main> 
     </div> 
 </div>   
