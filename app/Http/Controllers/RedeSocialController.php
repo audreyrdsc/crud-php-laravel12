@@ -74,7 +74,22 @@ class RedeSocialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nome' => ['required', 'string', 'max:100'],
+            'link' => ['required', 'url', 'max:255'],
+        ]);
+
+        $rede = Rede::findOrFail($id); //Busca a rede social pelo ID, ou retorna erro 404 se não encontrar
+
+        $rede->nome = $request->nome;
+        $rede->link = $request->link;
+
+        $rede->save();
+
+        return redirect()
+                ->route('redes-sociais.index')
+                ->with('updated', 'Rede Social atualizada com sucesso!');
+                //sucess é uma variavel de sessão que retornará a mensagem em index.blade.php
     }
 
     /**
@@ -82,6 +97,12 @@ class RedeSocialController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $rede = Rede::findOrFail($id); //Busca a rede social pelo ID, ou retorna erro 404 se não encontrar
+        $rede->delete(); //Deleta o registro encontrado
+
+        return redirect()
+                ->route('redes-sociais.index')
+                ->with('deleted', 'Rede Social deletada com sucesso!');
+                //deleted é uma variavel de sessão que retornará a mensagem em index.blade.php
     }
 }
