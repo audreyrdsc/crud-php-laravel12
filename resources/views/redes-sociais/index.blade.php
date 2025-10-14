@@ -398,6 +398,7 @@
                             <th scope="col">Id</th> 
                             <th scope="col">Nome</th> 
                             <th scope="col">Link</th>
+                            <th scope="col">Ver</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Excluir</th>  
                         </tr> 
@@ -408,8 +409,22 @@
                         @foreach($redes as $rede)
                             <tr> 
                                 <td> {{ $rede->id }}</td> 
+                               
                                 <td> {{ $rede->nome }} </td> 
+                               
                                 <td> {{ $rede->link }} </td> 
+                               
+                                <td> 
+                                    <!-- Button trigger modal
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verRede{ { $rede->id }}">
+                                        <i class="bi bi-eye"></i>
+                                    </button>  -->
+
+                                    <!-- Ícone sem botão mantendo comportamento do modal -->
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#verRede{{ $rede->id }}" class="text-primary" title="Visualizar">
+                                            <i class="bi bi-eye"></i>
+                                    </a>
+                                </td> 
                         
                                 <td>
                                     <a href="{{ route('redes-sociais.edit', $rede->id) }}" class="text-primary" title="Editar">
@@ -440,7 +455,29 @@
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td> 
+
                             </tr>   
+
+                            <!-- Modal exibir dados do item escolhido para visualização -->
+                            <div class="modal fade" id="verRede{{ $rede->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $rede->nome }}</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{ $rede->nome }}</p>
+                                        <p>{{ $rede->link }}</p>
+                                        <p>{{ $rede->video }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         @endforeach
                           
                     </tbody> 
@@ -452,9 +489,14 @@
     </div> 
 </div>   
 
-    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" 
+    <!--<script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
-    class="astro-vvvwv3sm" crossorigin="anonymous"></script> 
+    class="astro-vvvwv3sm" crossorigin="anonymous"></script> -->
+
+    <!-- Incluído para utilizar o componente modal do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+    crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" 
     integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" 
