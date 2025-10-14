@@ -1,0 +1,3 @@
+https://github.com/lucascudo/laravel-pt-BR-localization
+
+Passo a passo para tradução do PHP para português do Brasil
