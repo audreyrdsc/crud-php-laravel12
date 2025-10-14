@@ -469,7 +469,17 @@
                                     <div class="modal-body">
                                         <p>{{ $rede->nome }}</p>
                                         <p>{{ $rede->link }}</p>
-                                        <p>{{ $rede->video }}</p>
+                                        <!-- Modo simples apenas mostra código em texto<p>{ { $rede->video }}</p> -->
+                                        <p> <!-- Exibir o vídeo dentro de um iframe -->
+                                            @if($rede->video)                                            
+                                                <div class="embed-responsive embed-responsive-16by9 w-100">
+                                                    <iframe class="embed-responsive-item w-100" 
+                                                    style="width:100%; height: 340px"
+                                                    src="https://www.youtube.com/embed/{{ $rede->video }}?rel=0" 
+                                                    allowfullscreen></iframe>
+                                                </div>
+                                            @endif
+                                        </p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
