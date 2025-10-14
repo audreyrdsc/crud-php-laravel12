@@ -345,6 +345,7 @@
                     </div> 
                 </div> 
 
+
             <!-- Area da tabela -->
             <div class="table-responsive small">    
 
@@ -367,7 +368,30 @@
                     </script>
                 @endif
 
-                                    
+                <!-- Formulário de busca -->
+                <div class="container my-4">
+                    <form method="GET" action="{{ route('redes-sociais.index') }}">
+                        @csrf
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <input 
+                                        type="text" 
+                                        name="busca" 
+                                        class="form-control" 
+                                        placeholder="Buscar redes sociais..." 
+                                        value="{{ request('busca') }}"
+                                    >
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="bi bi-search"></i> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Fim do Formulário de busca -->
+                           
                 <table class="table table-striped table-sm"> 
                     <thead> 
                         <tr> 
@@ -422,7 +446,8 @@
                     </tbody> 
                 </table> 
             </div>
-            {{ $redes->appends(request()->query())->links() }}  <!-- Paginação -->
+            <!--{ { $redes->appends(request()->query())->links() }}   Paginação simples--> 
+           {{ $redes->appends(['busca' => request('busca')])->links() }} <!-- Paginação com busca -->
         </main> 
     </div> 
 </div>   
