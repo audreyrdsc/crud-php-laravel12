@@ -48,6 +48,7 @@ class RedeSocialController extends Controller
 
         $rede->nome = $request->nome;
         $rede->link = $request->link;
+        $rede->video = $request->video;
 
         $rede->save();
 
@@ -89,6 +90,7 @@ class RedeSocialController extends Controller
 
         $rede->nome = $request->nome;
         $rede->link = $request->link;
+        $rede->video = $request->video;
 
         $rede->save();
 
