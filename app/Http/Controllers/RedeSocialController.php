@@ -123,6 +123,18 @@ class RedeSocialController extends Controller
 
         $rede = Rede::findOrFail($id); //Busca a rede social pelo ID, ou retorna erro 404 se não encontrar
 
+        if($request->hasFile('capa')) {
+
+            if($rede->capa && file_exists(public_path($rede->capa))) {
+                unlink(public_path($rede->capa)); //Deleta o arquivo antigo antes atualizar                
+            }
+
+            $arquivo = $request->file('capa'); //Pega o arquivo
+            $nomeArquivo = uniqid() . '-msflix-.' . $arquivo->getClientOriginalExtension(); //Gera um nome único para o arquivo
+            $arquivo->move(public_path('uploads'), $nomeArquivo); //Move o arquivo para a pasta public/uploads
+            $rede->capa = 'uploads/' . $nomeArquivo; //Salva o caminho da imagem no banco de dados
+        }
+
         $rede->nome = $request->nome;
         $rede->link = $request->link;
         $rede->video = $request->video;
