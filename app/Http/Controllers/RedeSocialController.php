@@ -155,6 +155,10 @@ class RedeSocialController extends Controller
         $rede = Rede::findOrFail($id); //Busca a rede social pelo ID, ou retorna erro 404 se não encontrar
         $rede->delete(); //Deleta o registro encontrado
 
+        if($rede->capa && file_exists(public_path($rede->capa))) {
+                unlink(public_path($rede->capa)); //Deleta o arquivo antigo antes atualizar                
+        }
+
         return redirect()
                 ->route('redes-sociais.index')
                 ->with('deleted', 'Rede Social deletada com sucesso!');
