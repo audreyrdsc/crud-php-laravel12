@@ -348,8 +348,12 @@
             <!-- Area do Formulário -->
             <div class="col-md 12">
                 
-                <form action=" {{ route('redes-sociais.store')}}" method='post'>
+                <form action=" {{ route('redes-sociais.store')}}" method='post' enctype="multipart/form-data">
                     @csrf
+
+                    <div class="form-group">
+                        <input type="file" name="capa" class="form-control" id="">
+                    </div><br>
 
                     <div class="form-group">
                         <input type="text" name="nome" placeholder="Nome da Rede Social" class="form-control mb-3">
