@@ -348,9 +348,13 @@
             <!-- Area do Formulário -->
             <div class="col-md 12">
 
-                <form action=" {{ route('redes-sociais.update', $rede->id)}} " method='post'>
+                <form action=" {{ route('redes-sociais.update', $rede->id)}} " method='post' enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    <div class="form-group">
+                        <input type="file" name="capa" class="form-control" id="">
+                    </div><br>
 
                     <div class="form-group">
                         <input type="text" name="nome" placeholder="Nome da Rede Social" 
