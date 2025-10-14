@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rede;
+use Carbon\Carbon;
 
 class RedeSocialController extends Controller
 {
@@ -12,16 +13,42 @@ class RedeSocialController extends Controller
      */
     public function index(Request $request)
     {
+        //data de hoje formatada no padrão BR
+        $hoje = Carbon::now()->Format('d/m/Y');
+        //data de hoje formatada no padrão do BD para conultas
+        //$hoje = Carbon::now()->Format('Y/m/d');
+        //PHP puro: $hoje = date('d/m/Y H:i:s');
+        //$amanha = Carbon::now()->addDay()->Format('d/m/Y');
+        //$hoje = $amanha;
+        //PHP puro: $hoje = date('d/m/Y, strtotime(" + 1 day"))
+        //Semana passada: $semPassada = Carbon::now()->subWeek();
+        //Se for hoje: $hoje = Carbon::now()->isToday(); //True ou False
+        //Se Sábado ou Domingo: $hoje = Carbon::now()->isWeekend(); //True ou False
+
+        //True se for o mesmo dia, usado em cobrança
+        //$data = '2025-10-08'; //Data de referência
+        //$hoje = Carbon::now()->isSameDay($data); //True ou False
+
         //$redes = Rede::all(); //Pega todos os registros da tabela 'redes' sem paginação
         //$redes = Rede::paginate(3); //Pega todos os registros da tabela 'redes' com paginação de 3 em 3
         $busca = $request->input('busca'); //Pega o valor do campo de busca
         $redes = Rede::when($busca, function($query, $busca) {
             return $query->where('nome', 'like', "%{$busca}%")
                          ->orWhere('link', 'like', "%{$busca}%");
-        })->paginate(2); //Pega os registros da tabela 'redes' com paginação de 3 em 3, filtrando pela busca se houver
+        })
+        //->whereDate('created_at', $hoje) //filtra registros pela data específica
+        //->whereDate('created_at', '<=', $hoje) //filtra registros até a data de hoje
+        //->whereMonth('created_at', '<=', 7) //filtra registros até o mês 7
+        //->whereYear('created_at', '<=', 2024) //filtra registros até o ano 2024
+        //pode combinar por data, mês e ano
+        ->orderBy('created_at', 'desc')
+        ->paginate(4); //Pega os registros da tabela 'redes' com paginação de 3 em 3, filtrando pela busca se houver
         
         //Acessa a pasta resources/views/redes-sociais/index.blade.php
-        return view('redes-sociais.index', compact('redes', 'busca'));
+        return view('redes-sociais.index', compact(
+            'redes', 
+            'busca',
+            'hoje'));
     }
 
     /**
@@ -42,9 +69,17 @@ class RedeSocialController extends Controller
         $request->validate([
             'nome' => 'required|string|max:100',
             'link' => 'required|url|max:255',
+            'capa' => 'required|image|max:3000', //validação para imagem, max 3MB
         ]);
 
         $rede = new Rede();
+
+        if($request->hasFile('capa')) {
+            $arquivo = $request->file('capa'); //Pega o arquivo
+            $nomeArquivo = uniqid() . '-msflix-.' . $arquivo->getClientOriginalExtension(); //Gera um nome único para o arquivo
+            $arquivo->move(public_path('uploads'), $nomeArquivo); //Move o arquivo para a pasta public/uploads
+            $rede->capa = 'uploads/' . $nomeArquivo; //Salva o caminho da imagem no banco de dados
+        }
 
         $rede->nome = $request->nome;
         $rede->link = $request->link;
