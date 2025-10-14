@@ -329,7 +329,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
             
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> 
-                    <h1 class="h2">Lista de Redes Sociais</h1> 
+                    <h1 class="h2">Lista de Redes Sociais {{ $hoje }}</h1> 
                 
                     <div class="btn-toolbar mb-2 mb-md-0"> 
                         <div class="btn-group me-2"> 
@@ -396,6 +396,7 @@
                     <thead> 
                         <tr> 
                             <th scope="col">Id</th> 
+                            <th scope="col">Capa</th> 
                             <th scope="col">Nome</th> 
                             <th scope="col">Link</th>
                             <th scope="col">Ver</th>
@@ -408,7 +409,13 @@
 
                         @foreach($redes as $rede)
                             <tr> 
-                                <td> {{ $rede->id }}</td> 
+                                <td> {{ $rede->id }}</td>
+
+                                <td>
+                                    <img src="{{ asset($rede->capa) }}" 
+                                    alt="" 
+                                    style="width: 40px; border-radius: 5px;">
+                                </td> 
                                
                                 <td> {{ $rede->nome }} </td> 
                                
@@ -468,6 +475,11 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>{{ $rede->nome }}</p>
+                                        <p>
+                                            <img src="{{ asset($rede->capa) }}" 
+                                                alt=""
+                                                style="width: 100%; border-radius: 5px;">
+                                        </p>
                                         <p>{{ $rede->link }}</p>
                                         <!-- Modo simples apenas mostra código em texto<p>{ { $rede->video }}</p> -->
                                         <p> <!-- Exibir o vídeo dentro de um iframe -->
