@@ -358,6 +358,10 @@
                     <div class="form-group">
                         <input type="url" name="link" placeholder="URL da Rede Social" class="form-control mb-3">
                     </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="video" placeholder="Codigo do vídeo" class="form-control mb-3">
+                    </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Salvar</button>
