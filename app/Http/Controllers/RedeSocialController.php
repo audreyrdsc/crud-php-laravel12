@@ -10,13 +10,18 @@ class RedeSocialController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //$redes = Rede::all(); //Pega todos os registros da tabela 'redes' sem paginação
-        $redes = Rede::paginate(3); //Pega todos os registros da tabela 'redes' com paginação de 3 em 3
+        //$redes = Rede::paginate(3); //Pega todos os registros da tabela 'redes' com paginação de 3 em 3
+        $busca = $request->input('busca'); //Pega o valor do campo de busca
+        $redes = Rede::when($busca, function($query, $busca) {
+            return $query->where('nome', 'like', "%{$busca}%")
+                         ->orWhere('link', 'like', "%{$busca}%");
+        })->paginate(2); //Pega os registros da tabela 'redes' com paginação de 3 em 3, filtrando pela busca se houver
         
         //Acessa a pasta resources/views/redes-sociais/index.blade.php
-        return view('redes-sociais.index', compact('redes'));
+        return view('redes-sociais.index', compact('redes', 'busca'));
     }
 
     /**
